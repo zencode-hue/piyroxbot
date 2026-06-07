@@ -1,0 +1,17 @@
+{
+  "name": "piyrox-bot",
+  "version": "1.0.0",
+  "description": "Piyrox Marketplace Discord Bot with ticketing system",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["discord", "bot", "ticketing", "piyrox"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "discord.js": "^14.15.0"
+  }
+}
