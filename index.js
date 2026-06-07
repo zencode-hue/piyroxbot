@@ -182,7 +182,68 @@ client.on("messageCreate", async (message) => {
     message.member.permissions.has(PermissionsBitField.Flags.ManageGuild) ||
     message.member.roles.cache.has(config.staffRoleId);
 
-  const validCommands = ["manual", "support", "affiliate"];
+  const validCommands = ["manual", "support", "affiliate", "remind", "announce"];
+  if (command === "remind") {
+    if (args.length < 1) {
+      return message.reply({
+        content: "❌ Please mention the user you want to remind. Usage: `/remind @user`",
+        allowedMentions: { repliedUser: false },
+      });
+    }
+    const targetUser = message.mentions.users.first();
+    if (!targetUser) {
+      return message.reply({
+        content: "❌ Invalid user mentioned. Usage: `/remind @user`",
+        allowedMentions: { repliedUser: false },
+      });
+    }
+
+    try {
+      await message.channel.send(`Hey ${targetUser}, please check this channel regarding your ticket.`);
+      await message.delete().catch(() => {});
+    } catch (err) {
+      console.error(err);
+      message.reply({
+        content: "❌ Failed to send reminder.",
+        allowedMentions: { repliedUser: false },
+      });
+    }
+    return;
+  }
+
+  if (command === "announce") {
+    if (args.length < 1) {
+      return message.reply({
+        content: "❌ Please provide a message for the announcement. Usage: `/announce <message>` or `/announce everyone <message>`",
+        allowedMentions: { repliedUser: false },
+      });
+    }
+
+    let announcementContent = args.join(" ");
+    let mentionEveryone = false;
+
+    if (args[0].toLowerCase() === "everyone") {
+      mentionEveryone = true;
+      announcementContent = args.slice(1).join(" ");
+    }
+
+    try {
+      if (mentionEveryone) {
+        await message.channel.send(`@everyone ${announcementContent}`);
+      } else {
+        await message.channel.send(announcementContent);
+      }
+      await message.delete().catch(() => {});
+    } catch (err) {
+      console.error(err);
+      message.reply({
+        content: "❌ Failed to send announcement.",
+        allowedMentions: { repliedUser: false },
+      });
+    }
+    return;
+  }
+
   if (!validCommands.includes(command)) return;
 
   if (!isAdmin) {
