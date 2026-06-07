@@ -1,7 +1,7 @@
 module.exports = {
   token: process.env.BOT_TOKEN,
   prefix: ".",
-  guildId: "YOUR_GUILD_ID",
-  staffRoleId: "YOUR_STAFF_ROLE_ID",
-  ticketCategoryId: "YOUR_TICKET_CATEGORY_ID",
+  guildId: "854838937667665930",
+  staffRoleId: "1051221648110789694",
+  ticketCategoryId: "1234567890", // Replace with actual category ID
 };

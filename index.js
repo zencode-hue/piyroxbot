@@ -179,7 +179,8 @@ client.on("messageCreate", async (message) => {
 
   const isAdmin =
     message.member.permissions.has(PermissionsBitField.Flags.Administrator) ||
-    message.member.permissions.has(PermissionsBitField.Flags.ManageGuild);
+    message.member.permissions.has(PermissionsBitField.Flags.ManageGuild) ||
+    message.member.roles.cache.has(config.staffRoleId);
 
   const validCommands = ["manual", "support", "affiliate"];
   if (!validCommands.includes(command)) return;
