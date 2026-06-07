@@ -313,7 +313,7 @@ client.on("interactionCreate", async (interaction) => {
             ],
           },
           {
-            id: config.staffRoleId,
+            id: guild.roles.cache.get(config.staffRoleId),
             allow: [
               PermissionsBitField.Flags.ViewChannel,
               PermissionsBitField.Flags.SendMessages,
